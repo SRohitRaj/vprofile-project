@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: app
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: IMAGE
+        image: rohitshavili/vproweb:225
         ports:
         - containerPort: 8080
 ---
@@ -28,11 +28,11 @@ metadata:
   labels:
     app: app
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - protocol: TCP
     port: 8080
-    nodePort: 30030
+    targetPort: 8080
     name: http
   selector:
     app: app
